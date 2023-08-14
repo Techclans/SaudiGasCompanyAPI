@@ -1,0 +1,22 @@
+
+
+delete from django_migrations where app = 'auth'
+delete from django_migrations where app = 'admin'
+
+remove below tables from db
+
+
+auth_group_permissions
+
+
+auth_group
+auth_permission
+
+auth_user_user_permissions
+auth_user_groups
+auth_user
+django_admin_log
+
+Below is the details for super 
+batchahaja@thetechclans.com
+Amira@2594

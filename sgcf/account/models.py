@@ -3,8 +3,8 @@ from django.db import models
 # Create your models here.
 from django.db import models
 from django.contrib.auth.models import BaseUserManager,AbstractBaseUser,Group,PermissionsMixin,Permission
-from UserType.models import UserType
-from Organisation.models import Organization
+#from UserType.models import UserType
+
 
 #  Custom User Manager
 class UserManager(BaseUserManager):
@@ -50,13 +50,13 @@ class User(AbstractBaseUser,PermissionsMixin):
   tc = models.BooleanField()
   is_active = models.BooleanField(default=True)
   is_admin = models.BooleanField(default=False)
-  UserTypeId = models.ForeignKey('UserType.UserType',on_delete=models.CASCADE,related_name='UserTypeId', blank=True, null=True,db_column='UserTypeId')  # Field name made lowercase.
+  #UserTypeId = models.ForeignKey('UserType.UserType',on_delete=models.CASCADE,related_name='UserTypeId', blank=True, null=True,db_column='UserTypeId')  # Field name made lowercase.
   is_superuser =  models.BooleanField(default=False)
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
   mobile_number = models.CharField(max_length=20, blank=True)
   groups = models.ManyToManyField(Group, related_name='user', blank=True)
-  OrgId = models.ForeignKey('Organisation.Organization',on_delete=models.CASCADE,related_name='OrgId', blank=True, null=True,db_column='OrgId')  # Field name made lowercase.
+ # OrgId = models.ForeignKey('Organisation.Organization',on_delete=models.CASCADE,related_name='OrgId', blank=True, null=True,db_column='OrgId')  # Field name made lowercase.
   user_permissions = models.ManyToManyField(
         Permission,
         related_name='user',
