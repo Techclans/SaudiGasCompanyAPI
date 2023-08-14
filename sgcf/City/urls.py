@@ -1,9 +1,15 @@
 from django.contrib import admin
 from django.urls import path, include
-from . import views
+from .views import CityView
+
+from rest_framework.routers import DefaultRouter
+
+# Creating Router Object
+router = DefaultRouter()
+
+# Register StudentViewSet with Router
+router.register('apiCity', CityView, basename='City')
 
 urlpatterns = [
-#    path('admin/', admin.site.urls),
-    path('apiCity/', views.vwCity),
-    path('apiCity/<int:pk>',views.vwCityID)
+    path('', include(router.urls)),
 ]

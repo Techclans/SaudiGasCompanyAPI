@@ -5,9 +5,20 @@ from .serializers import clsCity
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework import status,viewsets
 from rest_framework.renderers import JSONRenderer,TemplateHTMLRenderer
-
+from rest_framework.authentication import BasicAuthentication,SessionAuthentication
+from rest_framework.permissions import IsAuthenticated,DjangoModelPermissions
 #
+
+
+class CityView(viewsets.ModelViewSet):    
+    queryset = City.objects.all()
+    serializer_class = clsCity
+    authentication_classes = [SessionAuthentication]
+    permission_classes = [IsAuthenticated, DjangoModelPermissions]
+
+"""
 
 # Create your views here.
 @api_view(['GET','POST'])
@@ -47,3 +58,6 @@ def vwCityID(request,pk):
     elif request.method == 'DELETE':
         vrCity.delete()
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+        
+"""
