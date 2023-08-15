@@ -45,4 +45,14 @@ urlpatterns = [
    path('',include('City.urls')),
    path('',include('UserType.urls')),
    path('',include('Lookups.urls')),
+   path('',include('Customer.urls')),
+   path('',include('DelivaryStatus.urls')),
+   path('',include('InvoiceStatus.urls')),
+   path('',include('Person.urls')),
+   path('',include('Seller.urls')),
+
+
+
+
+    
 ]

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import vsCity
+from .views import vsPerson
 
 from rest_framework.routers import DefaultRouter
 
@@ -8,7 +8,7 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 
 # Register StudentViewSet with Router
-router.register('apiCity', vsCity, basename='City')
+router.register('apiPerson', vsPerson, basename='Person')
 
 urlpatterns = [
     path('', include(router.urls)),

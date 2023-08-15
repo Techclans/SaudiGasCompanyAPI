@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import City
+from .models import mdlCity
 
-class clsCity(serializers.ModelSerializer):
+class srlCity(serializers.ModelSerializer):
     class Meta:
-        model = City
+        model = mdlCity
         fields = ('sysid','nameen','namear')

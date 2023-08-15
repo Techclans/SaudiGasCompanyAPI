@@ -50,6 +50,11 @@ INSTALLED_APPS = [
     'City',
     'UserType',
     'Lookups',
+    'Customer',
+    'DelivaryStatus',
+    'InvoiceStatus',
+    'Person',
+    'Seller',
 
 ]
 

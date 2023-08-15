@@ -9,7 +9,7 @@ from django.db import models
 
 
 class City(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
     citynameen = models.CharField(db_column='CityNameEn', max_length=150, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
     citynamear = models.CharField(db_column='CityNameAr', max_length=150, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
 
@@ -18,22 +18,12 @@ class City(models.Model):
         db_table = 'City'
 
 
-class Collectionagent(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    agentname = models.CharField(db_column='AgentName', max_length=150, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
+class Customer(models.Model):
+    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
     addrline1 = models.CharField(db_column='AddrLine1', max_length=250, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
     addrline2 = models.CharField(db_column='AddrLine2', max_length=250, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
-    city = models.ForeignKey(City, models.DO_NOTHING, db_column='City_ID')  # Field name made lowercase.
     coordinates = models.CharField(db_column='Coordinates', max_length=150, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'CollectionAgent'
-
-
-class Customer(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    agent = models.ForeignKey(Collectionagent, models.DO_NOTHING, db_column='Agent_ID')  # Field name made lowercase.
+    city = models.ForeignKey(City, models.DO_NOTHING, db_column='City_ID')  # Field name made lowercase.
     person = models.ForeignKey('Person', models.DO_NOTHING, db_column='Person_ID')  # Field name made lowercase.
 
     class Meta:
@@ -42,7 +32,7 @@ class Customer(models.Model):
 
 
 class Delivarysatus(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
     delivarysatusen = models.CharField(db_column='DelivarySatusEn', max_length=250, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
     delivarysatusar = models.CharField(db_column='DelivarySatusAR', max_length=250, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
 
@@ -52,7 +42,7 @@ class Delivarysatus(models.Model):
 
 
 class Invoice(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
     invoicenumber = models.CharField(db_column='InvoiceNumber', max_length=20, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
     invoicedate = models.DateTimeField(db_column='InvoiceDate', blank=True, null=True)  # Field name made lowercase.
     invoiceamount = models.FloatField(db_column='InvoiceAmount', blank=True, null=True)  # Field name made lowercase.
@@ -60,21 +50,11 @@ class Invoice(models.Model):
     order = models.ForeignKey('Order', models.DO_NOTHING, db_column='Order_ID')  # Field name made lowercase.
     ispaid = models.BooleanField(db_column='IsPaid', blank=True, null=True)  # Field name made lowercase.
     invoicestatus = models.IntegerField(db_column='InvoiceStatus', blank=True, null=True)  # Field name made lowercase.
-    status = models.ForeignKey('Invoicestatus', models.DO_NOTHING, db_column='Status_ID')  # Field name made lowercase.
+    status = models.ForeignKey('Paymentstatus', models.DO_NOTHING, db_column='Status_ID')  # Field name made lowercase.
 
     class Meta:
         managed = False
         db_table = 'Invoice'
-
-
-class Invoicestatus(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    statusnameen = models.CharField(db_column='StatusNameEn', max_length=50, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
-    statusnamear = models.CharField(db_column='StatusNameAr', max_length=50, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'InvoiceStatus'
 
 
 class Lookup(models.Model):
@@ -88,7 +68,7 @@ class Lookup(models.Model):
 
 
 class Order(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
     orderqty = models.IntegerField(db_column='OrderQty', blank=True, null=True)  # Field name made lowercase.
     orderdate = models.DateTimeField(db_column='OrderDate', blank=True, null=True)  # Field name made lowercase.
     orderamount = models.FloatField(db_column='OrderAmount', blank=True, null=True)  # Field name made lowercase.
@@ -104,7 +84,7 @@ class Order(models.Model):
 
 
 class Payment(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
     receiptno = models.CharField(db_column='ReceiptNo', max_length=200, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
     bankname = models.CharField(db_column='BankName', max_length=250, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
     receiptamount = models.FloatField(db_column='ReceiptAmount', blank=True, null=True)  # Field name made lowercase.
@@ -115,8 +95,18 @@ class Payment(models.Model):
         db_table = 'Payment'
 
 
+class Paymentstatus(models.Model):
+    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    statusnameen = models.CharField(db_column='StatusNameEn', max_length=50, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
+    statusnamear = models.CharField(db_column='StatusNameAr', max_length=50, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'PaymentStatus'
+
+
 class Person(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
     fname = models.CharField(db_column='FName', max_length=150, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
     lname = models.CharField(db_column='LName', max_length=1, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
     mname = models.CharField(db_column='MName', max_length=1, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
@@ -132,11 +122,11 @@ class Person(models.Model):
 
 
 class Plandelivary(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
     plandate = models.DateTimeField(db_column='PlanDate', blank=True, null=True)  # Field name made lowercase.
     expecteddelivary = models.DateTimeField(db_column='ExpectedDelivary', blank=True, null=True)  # Field name made lowercase.
     order = models.ForeignKey(Order, models.DO_NOTHING, db_column='Order_ID')  # Field name made lowercase.
-    collectionagent = models.ForeignKey(Collectionagent, models.DO_NOTHING, db_column='CollectionAgent_ID')  # Field name made lowercase.
+    collectionagent_id = models.IntegerField(db_column='CollectionAgent_ID')  # Field name made lowercase.
     delivarysatus = models.ForeignKey(Delivarysatus, models.DO_NOTHING, db_column='DelivarySatus_ID')  # Field name made lowercase.
 
     class Meta:
@@ -145,7 +135,7 @@ class Plandelivary(models.Model):
 
 
 class Product(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
     productnameen = models.CharField(db_column='ProductNameEn', max_length=250, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
     productnamear = models.CharField(db_column='ProductNameAr', max_length=250, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
     productprice = models.IntegerField(db_column='ProductPrice', blank=True, null=True)  # Field name made lowercase.
@@ -171,9 +161,10 @@ class Seller(models.Model):
 
 
 class Shipment(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
     vendorname = models.CharField(db_column='VendorName', max_length=1, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
     vendoraddr1 = models.CharField(db_column='VendorAddr1', max_length=250, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
+    vendorcity = models.IntegerField(db_column='VendorCity', blank=True, null=True)  # Field name made lowercase.
     plandelivary = models.ForeignKey(Plandelivary, models.DO_NOTHING, db_column='PlanDelivary_ID')  # Field name made lowercase.
     city = models.ForeignKey(City, models.DO_NOTHING, db_column='City_ID')  # Field name made lowercase.
 
@@ -183,7 +174,7 @@ class Shipment(models.Model):
 
 
 class Userinfo(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
     userid = models.CharField(db_column='UserId', max_length=75, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
     password = models.CharField(db_column='Password', max_length=25, db_collation='SQL_Latin1_General_CP1_CI_AS', blank=True, null=True)  # Field name made lowercase.
     personid = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')  # Field name made lowercase.
