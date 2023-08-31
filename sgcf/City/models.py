@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+# Create your models here. city
 
 class mdlCity(models.Model):
     sysid = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.

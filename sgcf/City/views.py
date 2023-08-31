@@ -9,7 +9,7 @@ from rest_framework import status,viewsets
 from rest_framework.renderers import JSONRenderer,TemplateHTMLRenderer
 from rest_framework.authentication import BasicAuthentication,SessionAuthentication
 from rest_framework.permissions import IsAuthenticated,DjangoModelPermissions
-#
+
 
 
 class vsCity(viewsets.ModelViewSet):    
