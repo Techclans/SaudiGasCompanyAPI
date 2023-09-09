@@ -1,5 +1,6 @@
 # Ignore migrations folders
 **/migrations/
+**/venv_scgf/
 
 # Ignore Python compiled files
 **/__pycache__/
